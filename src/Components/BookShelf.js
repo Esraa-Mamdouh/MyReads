@@ -1,31 +1,52 @@
 import React, { Component } from 'react'
 import BookItem from './BookItem';
+import PropTypes from 'prop-types';
 
+//{this.state.value == 'news'? <Text>data</Text>: null }
 class BookShelf extends Component {
     render() {
+      const {books, shelf,onShelfChange}=this.props;
+      console.log("BookShlf: currently read")
+      console.log("BookShlf: books1")
+      console.log(books);
+      console.log("BookShlf: books2")
+      const b=books.filter(book => (book.shelf === 'currentlyReading'));
+     console.log(b);
+      console.log("condition");
+      console.log(shelf === 'Currently Reading')
+      //console.log(CurrentlyReading[0].id)
         return (
         <div className="bookshelf">
-            <h2 className="bookshelf-title">Currently Reading</h2>
+            <h2 className="bookshelf-title">{shelf}</h2>
             <div className="bookshelf-books">
               <ol className="books-grid">
-                <li>
-                  <BookItem 
-                  Url="http://books.google.com/books/content?id=PGR2AwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE73-GnPVEyb7MOCxDzOYF1PTQRuf6nCss9LMNOSWBpxBrz8Pm2_mFtWMMg_Y1dx92HT7cUoQBeSWjs3oEztBVhUeDFQX6-tWlWz1-feexS0mlJPjotcwFqAg6hBYDXuK_bkyHD-y&source=gbs_api"
-                  bookTitle= "To Kill a Mockingbird"
-                  bookAuthors= {["Harper Lee", "Esraa Mamdouh"]}
-                  />                
-                </li>
-                <li>
-                  <BookItem 
-                  Url="http://books.google.com/books/content?id=yDtCuFHXbAYC&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE72RRiTR6U5OUg3IY_LpHTL2NztVWAuZYNFE8dUuC0VlYabeyegLzpAnDPeWxE6RHi0C2ehrR9Gv20LH2dtjpbcUcs8YnH5VCCAH0Y2ICaKOTvrZTCObQbsfp4UbDqQyGISCZfGN&source=gbs_api"
-                  bookTitle= "Ender's Game"
-                  bookAuthors= {["Orson Scott Card", "Esraa Mamdouh"]}
-                  />
-                </li>
+                  
+                 {
+                    books.map((book)=>( 
+                    <li key={book.id}>
+                      <BookItem 
+                      book={book}
+                      onShelfChange={onShelfChange}
+                      />                
+                    </li>
+                    )) 
+                }
+                
               </ol>
             </div>
             </div>
             )
     }
 }
+BookShelf.propTypes={
+  books: PropTypes.array.isRequired,
+  // CurrentlyReading: PropTypes.array.isRequired,
+  // WantToRead:PropTypes.array.isRequired,
+  // Read:PropTypes.array.isRequired,
+  shelf:PropTypes.string.isRequired,
+  onShelfChange:PropTypes.func.isRequired,
+}
 export default BookShelf;
+
+
+
