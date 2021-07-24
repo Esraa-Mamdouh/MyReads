@@ -1,59 +1,59 @@
 import React, { Component } from 'react'
 import * as BooksAPI from '.././BooksAPI'
 import BookItem from './BookItem';
-
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
  class Search extends Component {
    state={
      query:"",
      books:[],
    }
    onChangeQuery=(value)=>{
-    BooksAPI.search(value)
-    .then((books)=>
-        this.setState(()=>({
-          books
-        }))
+    //  try{
+    // BooksAPI.search(value)
+    // .then((books)=>
+    //     this.setState(()=>({
+    //       books
+    //     }))
         
-      )
-     this.setState(()=>({
+    //   )
+      
+    //    console.log("try books=",this.state.books)}
+    //   catch(e){
+    //     console.log("catch",e)
+    //     this.setState(()=>({
+    //       books:[]
+    //     }))
+    //   }
+    //  this.setState(()=>({
+    //    query:value,
+    //  }))
+    BooksAPI.search(value)
+    .then((books)=>{
+      try{
+        if(!books.error){
+          this.setState(()=>({
+          books
+        }))}
+        else{
+        throw books}
+      }
+      catch(e){
+        this.setState(()=>({
+                books:[]
+              }))
+        console.log("catch error",e)
+      }
+    }
+    )
+  this.setState(()=>({
        query:value,
      }))
    }
-  /*   handleSearchBooks = event => {
-    this.setState(prevState => ({
-      loading: !prevState.loading
-    }))
-
-    searchBooks(event.target.value)
-      .then(books => {
-        if ('error' in books) {
-          this.setState(prevState => ({
-            books: [],
-            loading: !prevState.loading
-          }))
-        } else {
-          this.setState(prevState => ({
-            books: books.map(book => {
-              // handle if book doesn't contain shelf
-              if (!('shelf' in book)) {
-                book.shelf = 'none'
-              }
-              // Find if the array contains an object by comparing the property value
-              if (this.props.books.some(({ id }) => id === book.id)) {
-                const currentBook = this.props.books.filter(({id}) => id === book.id)
-                book.shelf = currentBook[0].shelf
-              }
-              return book
-            }),
-            loading: !prevState.loading
-          }))
-        }
-      })
-      .catch(error => {
-        APIErrorHandling(error)
-      })
-  }*/
-  //onChange={this.handleSearchBooks}
     render() {
       console.log("query=",this.state.query)
       console.log("books=",this.state.books)
@@ -61,7 +61,10 @@ import BookItem from './BookItem';
           
         <div className="search-books">
             <div className="search-books-bar">
-              <button className="close-search" onClick={() => this.setState({ showSearchPage: false })}>Close</button>
+              {/* <button className="close-search" onClick={() => this.setState({ showSearchPage: false })}>Close</button> */}
+              <Link to="/">
+                <button className="close-search">Close</button>
+              </Link>
               <div className="search-books-input-wrapper">
                 {/*
                   NOTES: The search from BooksAPI is limited to a particular set of search terms.

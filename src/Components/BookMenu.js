@@ -4,13 +4,15 @@ import PropTypes from 'prop-types';
  class BookMenu extends Component {
     render() {
         const {book,onShelfChange}=this.props;
+        const shelf = book.shelf ? book.shelf : "none"
+
         return (
             <div className="book-shelf-changer">
                 <select
                 onChange={event => {
                 onShelfChange(book, event.target.value)
                 }}
-                value={book.shelf}
+                value={shelf}
                 >
                     <option value="move" disabled>Move to...</option>
                     <option value="currentlyReading">Currently Reading</option>
