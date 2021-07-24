@@ -107,8 +107,9 @@ class BooksApp extends React.Component {
   // }
   render() {
     return (
+      // <div className="app">
       <Router>
-        {/* <div className="app"> */}
+          <div className="app">
         <Switch>
           <Route exact path="/">
             <Home 
@@ -124,7 +125,7 @@ class BooksApp extends React.Component {
             
           </Route>
         </Switch>
-        {/* </div> */}
+        </div>
       </Router>
         // <div className="app">
         //   {this.state.showSearchPage ? (
