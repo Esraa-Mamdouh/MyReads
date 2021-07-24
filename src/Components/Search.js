@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import * as BooksAPI from '.././BooksAPI'
 import BookItem from './BookItem';
+import PropTypes from 'prop-types';
+
 import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
   Link
 } from "react-router-dom";
  class Search extends Component {
@@ -13,25 +12,6 @@ import {
      books:[],
    }
    onChangeQuery=(value)=>{
-    //  try{
-    // BooksAPI.search(value)
-    // .then((books)=>
-    //     this.setState(()=>({
-    //       books
-    //     }))
-        
-    //   )
-      
-    //    console.log("try books=",this.state.books)}
-    //   catch(e){
-    //     console.log("catch",e)
-    //     this.setState(()=>({
-    //       books:[]
-    //     }))
-    //   }
-    //  this.setState(()=>({
-    //    query:value,
-    //  }))
     BooksAPI.search(value)
     .then((books)=>{
       try{
@@ -55,13 +35,14 @@ import {
      }))
    }
     render() {
+      // start debug
       console.log("query=",this.state.query)
       console.log("books=",this.state.books)
+      // end debug
         return (
           
         <div className="search-books">
             <div className="search-books-bar">
-              {/* <button className="close-search" onClick={() => this.setState({ showSearchPage: false })}>Close</button> */}
               <Link to="/">
                 <button className="close-search">Close</button>
               </Link>
@@ -80,7 +61,6 @@ import {
                 placeholder="Search by title or author"
                 onChange={(event)=>this.onChangeQuery(event.target.value)}
                 />
-                {/* {JSON.stringify(this.state)} */}
               </div>
             </div>
             
@@ -102,5 +82,8 @@ import {
             
         )
     }
+}
+BookItem.propTypes={
+  onShelfChange:PropTypes.func.isRequired,
 }
 export default Search;

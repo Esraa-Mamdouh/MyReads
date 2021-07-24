@@ -25,9 +25,6 @@ import PropTypes from 'prop-types';
     }
 }
 BookMenu.propTypes={
-    // Url: PropTypes.string.isRequired,
-    // bookTitle: PropTypes.string.isRequired,
-    // bookAuthors:PropTypes.array.isRequired,
     book:PropTypes.object.isRequired,
     onShelfChange:PropTypes.func.isRequired,
 

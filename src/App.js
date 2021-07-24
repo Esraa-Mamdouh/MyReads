@@ -7,7 +7,6 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
 } from "react-router-dom";
 class BooksApp extends React.Component {
   state = {
@@ -18,11 +17,6 @@ class BooksApp extends React.Component {
      * pages, as well as provide a good URL they can bookmark and share.
      */
     books:[],
-    CurrentlyReading:[],         //array of current reading
-    WantToRead:[],               //array of want to read
-    Read:[] ,                     //array of read
-    //TODO: use react router instead of this state
-    showSearchPage: false
   }
   componentDidMount(){
        BooksAPI.getAll()
@@ -31,28 +25,7 @@ class BooksApp extends React.Component {
           books
         }))
         
-      )/*.then((books) =>(
-        this.state.books.forEach(book =>{
-          if(book.shelf === 'currentlyReading'){
-            this.setState((currentState)=>{
-              currentState.CurrentlyReading.push(book)
-              return currentState.CurrentlyReading;
-            })
-          }else if(book.shelf === 'wantToRead'){
-            this.setState((currentState)=>{
-              currentState.WantToRead.push(book)
-              return currentState.WantToRead
-            })
-          }else if(book.shelf === 'read'){
-            this.setState((currentState)=>{
-              currentState.Read.push(book)
-              return currentState.Read
-            })
-          }
-    
-        })
-      ))*/
-
+      )
   }
 
   onShelfChange=(book,shelf)=>{
@@ -60,7 +33,7 @@ class BooksApp extends React.Component {
     BooksAPI.update(book, shelf)
     //new book exists on my shelf
     
-      let exists =false;
+    let exists =false;
     this.state.books.every( element=>{
       if(element.id===book.id){
         exists=true;
@@ -87,27 +60,10 @@ class BooksApp extends React.Component {
       }))
     }
     console.log("inside onShelChange")
-
-    /*BooksAPI.update(book, shelf);
-    this.setState((currentState)=>{
-      currentState.books.forEach(element => {
-        if(element.id===book.id){
-          element.shelf=shelf;
-        }
-      });
-      return currentState.books;
-    })
-    console.log("inside onShelChange")*/
-  
   }
-
-  // search=()=>{
-  //   this.setState({ showSearchPage: true })
-  //   console.log("inside search")
-  // }
   render() {
     return (
-      // <div className="app">
+      
       <Router>
           <div className="app">
         <Switch>
@@ -118,31 +74,13 @@ class BooksApp extends React.Component {
           />
           </Route>
           <Route path="/search">
-            {/* <div>Esraa</div> */}
             <Search
               onShelfChange={this.onShelfChange}
             />
-            
           </Route>
         </Switch>
         </div>
       </Router>
-        // <div className="app">
-        //   {this.state.showSearchPage ? (
-        //     <Search
-        //     onShelfChange={this.onShelfChange}
-        //     />
-        //   ) : (
-        //     <Home 
-        //     books={this.state.books} 
-        //     onShelfChange={this.onShelfChange}
-        //     search={this.search}
-        //     // CurrentlyReading={this.state.CurrentlyReading}
-        //     // WantToRead={this.state.WantToRead}
-        //     // Read={this.state.Read}
-        //     />)
-        //   }
-        // </div>
         
     )
   }
