@@ -112,4 +112,4 @@ The backend API uses a fixed set of cached search results and is limited to a pa
 
 ## Copyright and Authoruty
 
-Esraa Mamdouh with a U dacity starter code in the Frontend web development nano-degree with Udacity.
+***Esraa Mamdouh*** with a ***Udacity*** starter code in the Frontend web development nano-degree with Udacity.
