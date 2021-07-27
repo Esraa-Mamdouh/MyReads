@@ -29,6 +29,7 @@ class BookShelf extends Component {
                       <BookItem 
                       book={book}
                       onShelfChange={onShelfChange}
+                      books={books}
                       />                
                     </li>
                     )) 

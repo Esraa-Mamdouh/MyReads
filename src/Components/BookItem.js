@@ -1,15 +1,14 @@
 import React, { Component } from 'react'
 import BookMenu from './BookMenu';
 import PropTypes from 'prop-types';
-
 class BookItem extends Component {
     render() {
-        const {book,onShelfChange}=this.props;
+        const {book,onShelfChange,books}=this.props;
         const thumbnail = book.imageLinks ? book.imageLinks.smallThumbnail : "../../images/book.jpg"
         // start debug
-        console.log("inside BookItem1")
+        /*console.log("inside BookItem1")
         console.log("inside BookItem2")
-        console.log("book",book)
+        console.log("book",book)*/
         // end debug
         return (
             
@@ -20,6 +19,7 @@ class BookItem extends Component {
                     <BookMenu
                     book={book}
                     onShelfChange={onShelfChange}
+                    books={books}
                     />
                 </div>
                 <div className="book-title">{book.title}</div>

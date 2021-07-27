@@ -3,8 +3,20 @@ import PropTypes from 'prop-types';
 
  class BookMenu extends Component {
     render() {
-        const {book,onShelfChange}=this.props;
-        const shelf = book.shelf ? book.shelf : "none"
+        //const books=this.props.books
+        const {book,onShelfChange,books}=this.props;
+        const b =(books.filter((Book)=>(Book.id === book.id)))
+        let s
+        if(b.length === 1){
+            s=b[0].shelf
+        }
+
+        console.log("heeeey",books,s)
+        const shelf = (s) ? s : "none"
+        console.log("book inside BookMenu",book.title)
+        //console.log()
+        console.log("shelf =",books.filter(()=>(books.id === book.id)).shelf)
+        //console.log()
 
         return (
             <div className="book-shelf-changer">

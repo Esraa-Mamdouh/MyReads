@@ -29,36 +29,52 @@ class BooksApp extends React.Component {
   }
 
   onShelfChange=(book,shelf)=>{
-    
+    console.log("book outside")
+    console.log(book)
+    console.log("book shelf")
+    console.log(shelf)
     BooksAPI.update(book, shelf)
     //new book exists on my shelf
-    
-    let exists =false;
-    this.state.books.every( element=>{
-      if(element.id===book.id){
-        exists=true;
-        return false;
-      }
-      console.log("flag= ",exists);
-      return true;
-    })
-    if(exists){
-      this.setState((currentState)=>{
+    .then(()=>{
+      console.log("book inside")
+      console.log(book)
+      console.log("book shelf")
+      console.log(shelf)
+      //check if book exists in the shelf or not 
+      let exists =false;
+      this.state.books.every( element=>{
+        if(element.id===book.id){
+          exists=true;
+          return false;
+        }
+        console.log("flag= ",exists);
+        return true;
+      })
+      //if exists: update its shelf
+      if(exists){
+        console.log("exists= ",exists);
+        this.setState((currentState)=>{
         currentState.books.forEach(element => {
           if(element.id===book.id){
             element.shelf=shelf;
           }
         });
         return book;
-      })
-    }
-    else{
-      book.shelf=shelf;
-      this.setState((currentState)=>({
-        books:[...currentState.books,book]
-        
-      }))
-    }
+
+        })
+      }
+      //if not existed: add a shelf to it and add the book to my books
+      else{
+        book.shelf=shelf;
+        console.log("not existed book")
+        console.log(book)
+        this.setState((currentState)=>({
+          books:[...currentState.books,book]
+          
+        }))
+      }
+    })
+
     console.log("inside onShelChange")
   }
   render() {
@@ -76,6 +92,7 @@ class BooksApp extends React.Component {
           <Route path="/search">
             <Search
               onShelfChange={this.onShelfChange}
+              books={this.state.books}
             />
           </Route>
         </Switch>

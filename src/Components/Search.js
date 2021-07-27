@@ -72,6 +72,7 @@ import {
                       <BookItem 
                       book={book}
                       onShelfChange={this.props.onShelfChange}
+                      books={this.props.books}
                       />                
                     </li>
                     )) 
@@ -85,5 +86,6 @@ import {
 }
 BookItem.propTypes={
   onShelfChange:PropTypes.func.isRequired,
+  books: PropTypes.array.isRequired
 }
 export default Search;
